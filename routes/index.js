@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+/* importar el controlador */
+const projectsController = require('../controllers/projectsController');
+
 module.exports = () => {
     /* ruta para el home */
-    router.get('/', (req, res) => {
-        res.send('Index');
-    });
+    router.get('/', projectsController.home);
 
-    router.get('/about', (req, res) => {
-        res.send('About us');
-    });
+    router.get('/about', projectsController.about);
 
     return router;
 }
