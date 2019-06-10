@@ -8,7 +8,5 @@ module.exports = () => {
     /* ruta para el home */
     router.get('/', projectsController.home);
 
-    router.get('/about', projectsController.about);
-
     return router;
 }
