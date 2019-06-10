@@ -3,6 +3,21 @@ const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+/* crear la conexion a la bd */
+const sequelize = require('./config/db');
+
+/* importar el modelo */
+require('./models/Projects');
+
+/* Testing the connection */
+sequelize.sync()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
 /* crear una app de express | init app*/
 const app = express();
 
