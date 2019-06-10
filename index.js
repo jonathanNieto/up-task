@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const sequelize = require('./config/db');
 
 /* importar el modelo */
-require('./models/Projects');
+require('./models/Project');
 
 /* Testing the connection */
 sequelize.sync()
@@ -30,12 +30,11 @@ app.use(express.static('public'));
 /* habilitando view engine | load View Engine */
 app.set('view engine', 'pug');
 
-/* añadri la carpeta de las vistas */
+/* añadir la carpeta de las vistas */
 app.set('views', path.join(__dirname, './views'));
 
 /* parse application/x-www-form-urlencoded */
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 /* usando las rutas */
 app.use('/', routes());
