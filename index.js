@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 /* crear una app de express | init app*/
 const app = express();
@@ -16,6 +17,10 @@ app.set('view engine', 'pug');
 
 /* añadri la carpeta de las vistas */
 app.set('views', path.join(__dirname, './views'));
+
+/* parse application/x-www-form-urlencoded */
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 /* usando las rutas */
 app.use('/', routes());
