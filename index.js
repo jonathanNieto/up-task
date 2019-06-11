@@ -3,11 +3,15 @@ const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+/* helpers con algunas funciones utiles */
+const helpers = require('./helpers');
+
 /* crear la conexion a la bd */
 const sequelize = require('./config/db');
 
-/* importar el modelo */
+/* importar lo modelos */
 require('./models/Project');
+require('./models/Task')
 
 /* Testing the connection */
 sequelize.sync()
@@ -32,6 +36,12 @@ app.set('view engine', 'pug');
 
 /* añadir la carpeta de las vistas */
 app.set('views', path.join(__dirname, './views'));
+
+/* pasar 'vardump' a la app */
+app.use((req, res, next) => {
+  res.locals.vardump = helpers.vardump;
+  next();
+});
 
 /* parse application/x-www-form-urlencoded */
 app.use(bodyParser.urlencoded({ extended: true }));

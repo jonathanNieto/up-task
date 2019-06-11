@@ -1,7 +1,13 @@
 /* form new project */
 .new-form{
-    width: 800px;
+    width: 900px;
     margin: auto;
     text-align: right;
+    padding: 20px 0;
+}
+
+.panel{
+    width: 900px;
+    margin: auto;
     padding: 20px 0;
 }

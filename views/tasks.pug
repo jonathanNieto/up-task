@@ -1,0 +1,24 @@
+extends layout
+block content
+  .text-center 
+    h4 #{pagename} - #{project.projectName}
+  pre= vardump(project)
+    // TODO - Formulario aqui
+  form.needs-validation.new-form.my-3(action=`/project/${project.url}` method="post" novalidate autocomplete="off")
+    .form-group.row
+      .text-left.col-sm-3
+        label(for="task" class="col-form-label") Nombre de la tarea:
+      .col-sm-9
+        input(type="text" name="task" class="form-control" id="task" placeholder="Nombre Tarea" required)
+        .valid-feedback Nombre valido
+        .invalid-feedback El nombre de la tarea es requerida
+    button(class="btn btn-primary" type="submit") Guardar
+
+    // TODO - Listado de Pendientes
+  
+
+    // Acciones que se pueden realizar
+    .panel
+      .d-flex.justify-content-between
+        a(href=`/project/edit/${project.id}` class="btn btn-outline-warning") Editar Proyecto
+        button#delete-project(class="btn btn-outline-danger" type="button" data-project-url=project.url) Eliminar Proyecto

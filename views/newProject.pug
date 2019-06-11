@@ -1,9 +1,10 @@
 extends layout
+include mixins/createProject
 block content
   .text-center
     h4 #{pagename}
 
-
+  pre= vardump(project)
     if errors
       .new-form
         .alert.alert-danger
@@ -11,12 +12,7 @@ block content
           hr
           each error in errors
             p=error.text
+            
+  +createProject(project)
 
-  form.needs-validation.new-form.my-3(action="/new-project" method="post" novalidate autocomplete="off")
-    .form-group.row
-      label(for="validationCustom01" class="col-sm-3 col-form-label") Nuevo Proyecto
-      .col-sm-9
-        input(type="text" name="projectName" class="form-control" id="validationCustom01" placeholder="Nombre Proyecto" required)
-        .valid-feedback Nombre valido
-        .invalid-feedback El nombre del proyecto es requerido        
-    button(class="btn btn-primary" type="submit") Agregar
+  

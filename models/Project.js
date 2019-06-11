@@ -16,11 +16,11 @@ Project.init({
     autoIncrement: true
   },
   projectName: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(100),
     allowNull: false
   },
   url: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(100),
   }
 }, {
     hooks: {

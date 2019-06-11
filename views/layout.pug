@@ -20,9 +20,9 @@ html(lang="en")
                         i.fa.fa-plus(aria-hidden='true') &nbsp;
                 div.list-group.list-group-flush
                     h4.list-group-item.text-info Mis Proyectos
-                    a(href="#" class="list-group-item list-group-item-action bg-light") Diseño de tienda virtual
-                    a(href="#" class="list-group-item list-group-item-action bg-light") Diseño de Nuevo Blog
-                    a(href="#" class="list-group-item list-group-item-action bg-light") Diseño de logotipo
+                    if(projects.length)
+                        each project in projects
+                            a(href=`/project/${project.url}` class="list-group-item list-group-item-action bg-light")= project.projectName
             div#page-content-wrapper
                 nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
                     button.btn.btn-primary.mr-3#menu-toggle &#9776;
@@ -39,11 +39,12 @@ html(lang="en")
 
                 div.container-fluid.my-3
                     block content
+                    //- pre= vardump(projects)
         
         block scripts
             script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js")
             script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js")
             script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js")
-            script(src="/js/app.js")
+            script(src="/dist/bundle.js")
             
             
