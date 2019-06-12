@@ -1,4 +1,7 @@
 /* form new project */
+html{
+    font-size: 16px;
+}
 .new-form{
     width: 900px;
     margin: auto;
@@ -10,4 +13,19 @@
     width: 900px;
     margin: auto;
     padding: 20px 0;
+}
+
+.panel-user{
+    width: 500px;
+    border-radius: 10px;
+    padding: 20px 25px;
+}
+
+.no-margin{
+    margin: 0;
+}
+
+.dw{
+    width: 100vw;
+    height: 100vh;
 }

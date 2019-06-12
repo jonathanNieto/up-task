@@ -1,9 +1,12 @@
 extends layout
 block content
   .text-center 
-    h4 #{pagename} - #{project.projectName}
-  pre= vardump(project)
-    // TODO - Formulario aqui
+    h4.d-inline.mr-2 #{pagename} - #{project.projectName}
+    a(href=`/project/edit/${project.id}` class="btn btn-outline-info mr-2") 
+      i.far.fa-edit(aria-hidden='true')
+    button#delete-project(class="btn btn-outline-danger" type="button" data-project-url=project.url)
+      i.far.fa-trash-alt(aria-hidden='true')
+
   form.needs-validation.new-form.my-3(action=`/project/${project.url}` method="post" novalidate autocomplete="off")
     .form-group.row
       .text-left.col-sm-3
@@ -15,10 +18,34 @@ block content
     button(class="btn btn-primary" type="submit") Guardar
 
     // TODO - Listado de Pendientes
-  
+  //- pre= vardump(tasks)
+  .panel
+    if tasks.length
+      ul.list-group#pending-list
+        each task in tasks
+          li.list-group-item.list-group-item-action.task(data-task=task.id)
+            .d-flex.justify-content-between
+              p.no-margin=task.task
+              div
+                if task.state
+                  i.far.fa-check-circle.fa-2x.text-success(aria-hidden='true' class="mr-5")
+                else
+                  i.far.fa-check-circle.fa-2x(aria-hidden='true' class="mr-5")
+                i.far.fa-trash-alt.fa-2x.text-danger(aria-hidden='true')
+      
+      .mt-5
+        .text-center
+          h4 Avance del proyecto
+        .progress.mt-3
+          .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuemin='0', aria-valuemax='100', id="progress-bar")
 
-    // Acciones que se pueden realizar
-    .panel
-      .d-flex.justify-content-between
-        a(href=`/project/edit/${project.id}` class="btn btn-outline-warning") Editar Proyecto
-        button#delete-project(class="btn btn-outline-danger" type="button" data-project-url=project.url) Eliminar Proyecto
+          
+    else
+      .alert.alert-dismissible.alert-primary
+        button.close(type='button', data-dismiss='alert') ×
+        h4.alert-heading Información!
+        p Este proyecto aún no tiene tareas.
+  
+      
+
+  

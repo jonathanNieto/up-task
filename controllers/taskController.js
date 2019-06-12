@@ -4,14 +4,14 @@ const Project = require('../models/Project');
 exports.newTask = async (req, res, next) => {
     /* get current project */
     const project = await Project.findOne({
-        where:{
+        where: {
             url: req.params.url
         }
     });
 
     /* get value from input */
     const { task } = req.body;
-    
+
     /* estado 0 = incompleto y el ID */
     const state = 0;
     const projectId = project.id;
@@ -37,4 +37,41 @@ exports.newTask = async (req, res, next) => {
             }, 1500);
         }
     }
+}
+
+exports.changeState = async (req, res, next) => {
+    const { id } = req.params;
+    const task = await Task.findOne({
+        where: {
+            id
+        }
+    });
+
+    /* change the state */
+    let state = 0;
+    if (task.state === state) {
+        state = 1;
+    }
+    task.state = state;
+
+    const result = await task.save();
+
+    if (!result) {
+        return next();
+    }
+
+    res.status(200).send('Estado de la tarea actualizado');
+}
+
+exports.deleteTask = async (req, res) => {
+    const { id } = req.params;
+    const result = await Task.destroy({
+        where: { id }
+    });
+
+    if (!result) {
+        return next();
+    }
+
+    res.status(200).send('Tarea eliminada correctamente');
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        include ./partials/header
+    body.bg-secondary
+        
+        .dw.d-flex.justify-content-center.align-items-center
+            .panel-user.bg-primary
+                if locals.messages
+                    each category in Object.keys(locals.messages)
+                        each message in messages[category]
+                            .alert(class=`alert-${category}` role='alert')
+                                p= message
+
+                            
+
+                        
+                .text-center    
+                    h3 #{pageName}
+                form.needs-validation.mt-2(action=`/new-user-account` method="post" novalidate autocomplete="off")
+                    .form-group.row
+                        label(for="email" class="col-sm-3 col-form-label") E-mail:
+                        .col-sm-9
+                            input(value=email type="email" name="email" class="form-control" id="email" placeholder="Tu e-mail" required)
+                            .invalid-feedback.text-white Un e-mail valido es requerido
+                    .form-group.row
+                        label(for="password" class="col-sm-3 col-form-label") Contraseña:
+                        .col-sm-9
+                            input(type="password" name="password" class="form-control" id="password" placeholder="Tu contraseña" required)
+                            .invalid-feedback.text-white El password es requerido
+                    .d-flex.justify-content-end
+                        button(class="btn btn-secondary" type="submit") Crear cuenta
+                    .d-flex.justify-content-start
+                        a(href="/login", title="Inicia sesión con tu cuenta").text-white Iniciar Sesión
+                        
+        script(src="/dist/bundle.js")
+            
